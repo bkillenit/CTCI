@@ -21,10 +21,16 @@ class ArrayList {
 		if( !args ) return;
 
 		args.forEach(function(elem){
-			if( this.elements + 1 > this.array.length) doubleArraySize();
+			if( Array.isArray(elem) ) {
+				elem.forEach(function(val){
+					this.add(val);
+				});
+			} else {
+				if( this.elements + 1 > this.array.length) doubleArraySize();
 
-			this.array[this.elements] = elem;
-			this.elements += 1;
+				this.array[this.elements] = elem;
+				this.elements += 1;
+			}
 		});
 	}
 
