@@ -14,6 +14,8 @@ var isUnique = function( str ) {
 };
 
 // given two strings, write a method to decide if one is a permutation of the other
+// assume x = str1.length and y = str2.length and n = 2 strings
+// we get O(x + y) hashes and O(max(x,y)) lookups giving O(max(x,y)) runtime.
 var checkPermutation = function( str1, str2 ) {
 	function hashCharCountForString( str ) {
 		var charHash = {};
@@ -42,4 +44,40 @@ var checkPermutation = function( str1, str2 ) {
 	var keysChecked = [];
 
 	return ( checkCharHash(charHash1 , charHash2, keysChecked) && checkCharHash(charHash2, charHash1, keysChecked) );
+};
+
+// write a method to replace all spaces in a string with %20, assume the string has sufficient space to hold the extra chars
+// and that you know the true length of the string. Also, assume the str is already a char array.
+var URLify = function( charArray ){
+	charArray.forEach(function( char, index ){
+		if(char === " ") charArray[index] = "%20";
+	});
+
+	return charArray.join('');
+};
+
+// given a string, write a function to determine if the word is a permutation of a palindrome. Does not matter if the palindrome is an acutal
+// dictionary word. A permutation in this case is a rearrangement of letters.
+// Runtime: O(n) + O(n) = O(2n) or O(n) worse case. Best Case O(n) + O(2) = O(n+2) or O(n)
+var palinPerm = function( str ) {
+	var charArray = str.split('');
+	var charCountHash = {};
+
+	// hash the count of how many times a character appears in the string array
+	charArray.forEach(function( char ){
+		if( charCountHash[char] === undefined ) charCountHash[char] = 1;
+		else charCountHash[char] += 1;
+	});
+
+	var numOdds = 0;
+
+	// each palindrome has a unique property that if it has 1 odd count of characters, it is an odd length palindrome and if it has no odd
+	// count of characters it is an even length palindrome. If there are 2 or more odd counts of characters, the string cannot be a permutation
+	// of a palindrome.
+	Object.keys(charHashCount).forEach(function( char ){
+		if( charHashCount[char] % 2 === 1 ) numOdds += 1;
+		if( numOdds === 2 ) return false;
+	});
+
+	return true;
 };
