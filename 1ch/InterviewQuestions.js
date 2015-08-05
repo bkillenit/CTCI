@@ -128,7 +128,7 @@ var oneAway = function( str1, str2 ) {
 // write a function that compresses a string based on the character count,
 // if the string is already compressed, return the string.
 // ex. aabcccccaaa would be a2b1c5a3
-// would use reduce form the underscore library instead of each to track the previous character
+// would use reduce from the underscore library instead of each to track the previous character
 var stringCompression = function( str ){
 	var charArray = str.split('');
 	var countArray = [];
@@ -156,3 +156,9 @@ var stringCompression = function( str ){
 		return answer;
 	}
 };
+
+// given an image represented by an N x N matrix, where each pixel is 4bytes, write a method to rotate
+// the image by 90 degrees. Can you do this in place?
+var rotateMatrix = function( imgMat ) {
+
+}
