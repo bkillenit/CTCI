@@ -124,3 +124,35 @@ var oneAway = function( str1, str2 ) {
 		else return false;
 	else return false;
 };
+
+// write a function that compresses a string based on the character count,
+// if the string is already compressed, return the string.
+// ex. aabcccccaaa would be a2b1c5a3
+// would use reduce form the underscore library instead of each to track the previous character
+var stringCompression = function( str ){
+	var charArray = str.split('');
+	var countArray = [];
+	var prevChar = '';
+
+	charArray.forEach(function(char){
+		if( char !== prevChar ) {
+			countArray.push([char, 1]);
+			prevChar = char;
+		} else {
+			var prevCount = countArray[countArray.length-1][1];
+			countArray[countArray.length-1] = [char, prevCount + 1];
+		}
+	});
+
+	// check to see if the compression will save us any space.
+	if( countArray.length * 2 >= str.length ) return str;
+	else {
+		var answer = "";
+
+		countArray.forEach(function( countTuple ){
+			answer += countTuple[0] + countTuple[1];
+		});
+
+		return answer;
+	}
+};
