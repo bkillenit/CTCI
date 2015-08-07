@@ -230,3 +230,11 @@ var zeroMatrix = function( mtx ) {
 
 	return mtx;
 }
+
+// assume you have a method isSubstring which checks if one word is a substring of another.
+// Given two string, s1 and s2, write a function that determines if s2 is a rotation of s1
+// using only one call to isSubstring().
+// ex. waterbottle is a rotation of erbottlewat
+var stringRotation = function(){
+	
+}
