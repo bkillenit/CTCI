@@ -195,3 +195,38 @@ var rotateMatrix = function( imgMat ) {
 
 	return imgMat;
 }
+
+// write an algorithm such that if an element in an MxN matrix is zero, it's entire row and column is set to 0
+// assuming matrix is two dimensional
+var zeroMatrix = function( mtx ) {
+	var m = mtx.length;
+	var n = mtx[0].length;
+	var zeroRows = [];
+	var zeroCols = [];
+
+	var zeroRowAndCol = function(row,  col) {
+		zeroRows.push(row);
+		zeroCols.push(col);
+
+		for(var i = 0; i < m; i++) {
+			mtx[i][col] = 0;
+		}
+
+		for(var i = 0; i < n; i++) {
+			mtx[row][i] = 0;
+		}
+	}
+
+	for(var i = 0; i < m; i++) {
+		for(var j = 0; j < n; j++) {
+			if( i in zeroRow || j in zeroCols ) continue;
+			else {
+				var elem = mtx[i][j];
+
+				if(elem === 0) zeroRowAndCol(i, j);
+			}
+		}
+	}
+
+	return mtx;
+}
