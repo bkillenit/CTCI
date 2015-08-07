@@ -158,7 +158,40 @@ var stringCompression = function( str ){
 };
 
 // given an image represented by an N x N matrix, where each pixel is 4bytes, write a method to rotate
-// the image by 90 degrees. Can you do this in place?
+// the image by 90 degrees. Can you do this in place? Try to rotate the image 90 degrees to the right.
+// challenge: assume the array is one dimensional
 var rotateMatrix = function( imgMat ) {
+	var pixelDepth = 4;
+	var n = Math.sqrt((imgMat.length / pixelDepth));
 
+	var convertIndex = function( row, column ) {
+		return n * row + column;
+	};
+
+	var swpIndex = function( coordTup1, coordTup2) {
+		var row1 = coordTup1[0];
+		var col1 = coordTup1[1];
+		var row2 = coordTup2[0];
+		var col2 = coordTup2[1];
+
+		var idx1 = convertIndex(row1, col1);
+		var idx2 = convertIndex(row2, col2);
+
+		for(var i = 0; i < pixelDepth; i++) {
+			var temp = imgMat[idx1 + i];
+			imgMat[idx1 + i] = imgMat[idx2 + i];
+			imgMat[idx2 + i] = temp;
+		}
+	}
+
+	for(var i = 0; i < n; i++) {
+		for(var j = 0; j < n; j++) {
+			var maxIdx = n - 1;
+			var swpCoord = [maxIdx - j, i];
+
+			swpPixels([i,j], swpCoord);
+		}
+	}
+
+	return imgMat;
 }
