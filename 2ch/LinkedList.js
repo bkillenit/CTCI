@@ -1,3 +1,5 @@
+// will be using es6 class syntax, compatible with JavaScript 1.7 on.
+
 class LinkedList {
 	var head;
 
